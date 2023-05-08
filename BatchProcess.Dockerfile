@@ -2,6 +2,9 @@
 # FROM mcr.microsoft.com/azure-functions/python:4-python3.9-appservice
 FROM mcr.microsoft.com/azure-functions/python:4-python3.9
 
+COPY /certs/* /usr/local/share/ca-certificates/
+RUN chmod 644 /usr/local/share/ca-certificates/*.crt && update-ca-certificates
+
 ENV AzureWebJobsScriptRoot=/home/site/wwwroot \
     AzureFunctionsJobHost__Logging__Console__IsEnabled=true
 

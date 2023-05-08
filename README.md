@@ -193,7 +193,7 @@ Here is the explanation of the parameters:
 |CHUNK_OVERLAP |100 | OPTIONAL: Overlap between chunks for document splitting. Default: 100 |
 |CONVERT_ADD_EMBEDDINGS_URL| http://batch/api/BatchStartProcessing | URL for Batch processing Function: "http://batch/api/BatchStartProcessing" for docker compose |
 |AzureWebJobsStorage | AZURE_BLOB_STORAGE_CONNECTION_STRING FOR_AZURE_FUNCTION_EXECUTION | Azure Blob Storage Connection string for Azure Function - Batch Processing |
-
+|REQUESTS_CA_BUNDLE | /etc/ssl/certs/ca-certificates.crt | CA cert store, don't forget to put your own CA certs in certs folder |
 
 
 Optional parameters for additional features (e.g. document text extraction with OCR):
