@@ -1,5 +1,7 @@
 FROM python:3.9.10-slim-buster
 RUN apt-get update && apt-get install python-tk python3-tk tk-dev -y
+COPY /certs/* /usr/local/share/ca-certificates/
+RUN chmod 644 /usr/local/share/ca-certificates/*.crt && update-ca-certificates
 COPY ./code/requirements.txt /usr/local/src/myscripts/requirements.txt
 WORKDIR /usr/local/src/myscripts
 RUN pip install -r requirements.txt

@@ -1,7 +1,9 @@
 version: "3.9"
 services:
   web:
-    image: fruocco/oai-embeddings
+    build:
+      context: .
+      dockerfile: WebApp.Dockerfile
     ports:
       - "8080:80"
     env_file:
@@ -9,6 +11,8 @@ services:
     depends_on:
       api:
         condition: service_healthy
+      storage:
+        condition: service_started
   api:
     image: redis/redis-stack-server:latest
     ports:
@@ -22,7 +26,9 @@ services:
       retries: 5
       start_period: 5s
   batch:
-    image: fruocco/oai-batch:latest
+    build:
+      context: .
+      dockerfile: BatchProcess.Dockerfile
     ports: 
       - "8081:80"
     env_file:
@@ -30,3 +36,13 @@ services:
     depends_on:
       api:
         condition: service_healthy
+      storage:
+        condition: service_started
+  storage:
+    image: mcr.microsoft.com/azure-storage/azurite:latest
+    hostname: storage
+    restart: always
+    ports:
+      - "10000:10000"
+      - "10001:10001"
+      - "10002:10002"
